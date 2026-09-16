@@ -1,1 +1,199 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Video Generator</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #0f1115;
+      color: white;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 20px 0 8px;
+      font-size: 30px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #aaa;
+      margin-bottom: 25px;
+    }
+
+    .card {
+      background: #181b21;
+      border: 1px solid #292e38;
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input[type="file"],
+    textarea,
+    select {
+      width: 100%;
+      background: #0f1115;
+      color: white;
+      border: 1px solid #343a46;
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 18px;
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .row > div {
+      flex: 1;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 12px;
+      background: #6c5ce7;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #5848d6;
+    }
+
+    #preview {
+      width: 100%;
+      max-height: 350px;
+      object-fit: contain;
+      border-radius: 12px;
+      display: none;
+      margin-top: 15px;
+    }
+
+    .status {
+      text-align: center;
+      color: #aaa;
+      margin-top: 15px;
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>🎬 AI Video Generator</h1>
+    <p class="subtitle">Turn your photo into an AI video</p>
+
+    <div class="card">
+
+      <label>📷 Upload Photo</label>
+      <input type="file" id="imageInput" accept="image/*">
+
+      <img id="preview">
+
+      <label>✍️ Describe Movements</label>
+      <textarea id="movement"
+        placeholder="Example: Show construction workers naturally working on the house..."></textarea>
+
+      <label>🚫 What Should Be Avoided?</label>
+      <textarea id="avoid"
+        placeholder="Example: Avoid changing the house structure, distorted workers, camera shake..."></textarea>
+
+      <div class="row">
+
+        <div>
+          <label>⏱️ Duration</label>
+          <select id="duration">
+            <option value="5">5 Seconds</option>
+            <option value="10" selected>10 Seconds</option>
+          </select>
+        </div>
+
+        <div>
+          <label>📱 Format</label>
+          <select id="format">
+            <option value="9:16" selected>9:16</option>
+            <option value="16:9">16:9</option>
+            <option value="1:1">1:1</option>
+          </select>
+        </div>
+
+      </div>
+
+      <button onclick="generateVideo()">
+        🚀 Generate Video
+      </button>
+
+      <p class="status" id="status">
+        Preparing your AI video...
+      </p>
+
+    </div>
+
+  </div>
+
+<script>
+
+  const imageInput = document.getElementById("imageInput");
+  const preview = document.getElementById("preview");
+
+  imageInput.addEventListener("change", function() {
+
+    const file = this.files[0];
+
+    if (file) {
+      preview.src = URL.createObjectURL(file);
+      preview.style.display = "block";
+    }
+
+  });
+
+  function generateVideo() {
+
+    const status = document.getElementById("status");
+
+    status.style.display = "block";
+
+    status.innerText =
+      "🚧 AI video generation will be connected in the next step...";
+
+  }
+
+</script>
+
+</body>
+</html>
